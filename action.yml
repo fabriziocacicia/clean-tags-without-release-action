@@ -26,7 +26,9 @@ runs:
         GITHUB_TOKEN: ${{ github.token }}
     - run: "echo releases: '${{ steps.get_releases.outputs.data }}'"
       shell: bash
-    - run: |
+    - name: Output test
+      shell: bash
+      run: |
         echo $("${{ steps.get_tags.outputs.data }}" | jq .[].name)
         
-      shell: bash
+      
