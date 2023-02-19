@@ -25,7 +25,6 @@ runs:
     - name: Output test
       shell: bash
       run: |
-        tags_list=$(jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}')
         tags_with_release=$(jq -c -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
         jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}' | while read -r tag; 
         do 
