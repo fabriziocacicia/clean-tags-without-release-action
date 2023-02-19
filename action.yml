@@ -12,7 +12,7 @@ runs:
       uses: octokit/request-action@v2.1.0
       id: get_tags
       with:
-        route: GET /repos/${{ github.repository }}/releases/tags
+        route: GET /repos/${{ github.repository }}/tags
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - run: "echo tags: '${{ steps.get_tags.outputs.data }}'"
