@@ -32,4 +32,4 @@ runs:
           echo "$i"
         done
  
-      shell: base
+      shell: bash
