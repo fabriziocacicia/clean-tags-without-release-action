@@ -29,7 +29,7 @@ runs:
     - name: Output test
       shell: bash
       run: |
-        echo $(jq .[].name  <<< '${{ steps.get_tags.outputs.data }}')
+        echo $(jq -c .[].name  <<< '${{ steps.get_tags.outputs.data }}')
        
         
       
