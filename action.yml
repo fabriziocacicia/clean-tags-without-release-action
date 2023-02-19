@@ -15,6 +15,6 @@ runs:
         route: GET /repos/{repo}/releases/tags
         repo: github.repository
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
     - run: "echo tags: '${{ steps.get_tags.outputs.data }}'"
       shell: bash
