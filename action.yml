@@ -26,3 +26,10 @@ runs:
         GITHUB_TOKEN: ${{ github.token }}
     - run: "echo releases: '${{ steps.get_releases.outputs.data }}'"
       shell: bash
+    - run: |
+        for i in "${{ steps.get_tags.outputs.data }}"
+        do
+          echo "$i"
+        done
+ 
+      shell: base
