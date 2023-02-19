@@ -29,7 +29,10 @@ runs:
     - name: Output test
       shell: bash
       run: |
-        echo $(jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}')
-       
+        readarray -t tags < $(jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}')
+        for tag in "${tags[@]}"; do
+            echo "$tag"
+        done
+
         
       
