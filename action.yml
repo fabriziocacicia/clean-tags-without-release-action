@@ -27,9 +27,6 @@ runs:
     - run: "echo releases: '${{ steps.get_releases.outputs.data }}'"
       shell: bash
     - run: |
-        for i in "${{ steps.get_tags.outputs.data }}"
-        do
-          echo "$i"
-        done
- 
+        echo $("${{ steps.get_tags.outputs.data }}" | jq .[].name)
+        
       shell: bash
