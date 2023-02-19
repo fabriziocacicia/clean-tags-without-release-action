@@ -32,7 +32,14 @@ runs:
         tags_list=$(jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}')
         tags_with_release=$(jq -c -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
         echo "then"
-        jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}' | while read -r tag; do echo "$tag in loop"; done
+        jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}' | while read -r tag; 
+        do 
+          if [[ "$tags_with_release" == *"$tag"* ]]; then
+            echo "$tag has a release"
+          else
+            echo "$tag is free"
+          fi
+        done
 
         
       
