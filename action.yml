@@ -1,7 +1,19 @@
-name: "Name of the Action"
-description: "Description of the Action"
+name: "Delete Tags without Release"
+description: "Delete all the Tags of a repository that are not associated to a Release"
 author: "mail@fabriziocacicia.com"
 
 runs:
-  using: "can be composite/docker/..."
-  ...
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+   - name: Get Tags
+     uses: octokit/request-action@v2.1.0
+     id: get_tags
+     with:
+        route: GET /repos/{repo}/releases/tags
+        repo: github.repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   - run: "echo tags: '${{ steps.get_tags.outputs.data }}'"
