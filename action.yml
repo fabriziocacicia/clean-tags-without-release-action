@@ -15,8 +15,6 @@ runs:
         route: GET /repos/${{ github.repository }}/tags
       env:
         GITHUB_TOKEN: ${{ github.token }}
-    - run: "echo tags: '${{ steps.get_tags.outputs.data }}'"
-      shell: bash
     - name: Get Releases
       uses: octokit/request-action@v2.1.0
       id: get_releases
@@ -24,8 +22,6 @@ runs:
         route: GET /repos/${{ github.repository }}/releases
       env:
         GITHUB_TOKEN: ${{ github.token }}
-    - run: "echo releases: '${{ steps.get_releases.outputs.data }}'"
-      shell: bash
     - name: Output test
       shell: bash
       run: |
