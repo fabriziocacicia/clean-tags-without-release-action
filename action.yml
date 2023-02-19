@@ -8,12 +8,12 @@ runs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-   - name: Get Tags
-     uses: octokit/request-action@v2.1.0
-     id: get_tags
-     with:
+    - name: Get Tags
+      uses: octokit/request-action@v2.1.0
+      id: get_tags
+      with:
         route: GET /repos/{repo}/releases/tags
         repo: github.repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   - run: "echo tags: '${{ steps.get_tags.outputs.data }}'"
+    - run: "echo tags: '${{ steps.get_tags.outputs.data }}'"
