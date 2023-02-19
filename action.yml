@@ -22,13 +22,19 @@ runs:
         route: GET /repos/${{ github.repository }}/releases
       env:
         GITHUB_TOKEN: ${{ github.token }}
+    - name: Find Tags with Releases
+      id: find_tags_with_release
+      shell: bash
+      run: |
+        TAGS_WITH_RELEASES=$(jq -c -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
+        echo "::set-output name=VALUES::$TAGS_WITH_RELEASES"
     - name: Delete free Tags
       shell: bash
       run: |
         tags_with_release=$(jq -c -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
         jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}' | while read -r tag; 
         do 
-          if [[ "$tags_with_release" != *"$tag"* ]]; then
+          if [[ "${{ steps.find_tags_with_release.outputs.values }}" != *"$tag"* ]]; then
             gh api --method DELETE -H "Accept: application/vnd.github+json" "/repos/${{ github.repository }}/git/refs/tags/$tag"
           fi
         done
