@@ -34,7 +34,10 @@ runs:
         tags_with_release=$(jq -c -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
         jq -c -r .[].name  <<< '${{ steps.get_tags.outputs.data }}' | while read -r tag; 
         do 
-          if [[ "${{ steps.find_tags_with_release.outputs.values }}" != *"$tag"* ]]; then
+          if [[ "$tags_with_release" == *"$tag"* ]]; then
+            echo "$tag has a release"
+          else
+            echo "$tag is free"
             gh api --method DELETE -H "Accept: application/vnd.github+json" "/repos/${{ github.repository }}/git/refs/tags/$tag"
           fi
         done
