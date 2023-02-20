@@ -26,7 +26,7 @@ runs:
       id: find_tags_with_release
       shell: bash
       run: |
-        TAGS_WITH_RELEASES=$(jq -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
+        TAGS_WITH_RELEASES=$(jq -c -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
         echo "VALUES<<EOF"$'\n'"$TAGS_WITH_RELEASES"$'\n'EOF >> $GITHUB_OUTPUT
     - name: Delete free Tags
       shell: bash
