@@ -27,7 +27,7 @@ runs:
       shell: bash
       run: |
         TAGS_WITH_RELEASES=$(jq -r .[].tag_name  <<< '${{ steps.get_releases.outputs.data }}')
-        echo "VALUES=$TAGS_WITH_RELEASES" >> $GITHUB_OUTPUT
+        echo "VALUES=${TAGS_WITH_RELEASES//\'/}" >> $GITHUB_OUTPUT
     - name: Delete free Tags
       shell: bash
       run: |
