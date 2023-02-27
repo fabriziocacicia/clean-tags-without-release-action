@@ -9,14 +9,14 @@ runs:
       with:
         fetch-depth: 0
     - name: Get Tags
-      uses: octokit/request-action@v2.1.0
+      uses: octokit/request-action@v2.1.7
       id: get_tags
       with:
         route: GET /repos/${{ github.repository }}/tags
       env:
         GITHUB_TOKEN: ${{ github.token }}
     - name: Get Releases
-      uses: octokit/request-action@v2.1.0
+      uses: octokit/request-action@v2.1.7
       id: get_releases
       with:
         route: GET /repos/${{ github.repository }}/releases
